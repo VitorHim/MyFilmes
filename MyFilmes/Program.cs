@@ -29,5 +29,10 @@ class Program
         filmes.Add(filme);
 
         Console.WriteLine("Filme cadastrado com sucesso!");
-    }
+        Console.WriteLine("lista de filmes cadastrados:");
+        foreach (var f in filmes)
+        {
+            Console.WriteLine($"Nome: {f.Nome}, Gênero: {f.Genero}, Ano: {f.AnoLancamento}, Avaliação: {f.Avaliacao}");
+        }
+    }   
 }
