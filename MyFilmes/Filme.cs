@@ -1,13 +1,11 @@
 ﻿
+namespace sistemaFilme;
 
-namespace sistemaFilme
+public class Filme
 {
-    internal class Filme
-    {
-        public string Nome;
-        public string Genero;
-        public int AnoLancamento;
-        public double Avaliacao;
+    public string Nome { get; set; } = string.Empty;
+    public string Genero { get; set; } = string.Empty;
+    public int AnoLancamento { get; set; }
+    public double Avaliacao { get; set; }
 
-    }
 }
