@@ -39,6 +39,10 @@ class Program
                     FavoritarFilme(filmes);
                     break;
 
+                case "4":
+                    PesquisarPorGenero(filmes);
+                    break;
+
                 default:
                     break;
             }
@@ -173,6 +177,47 @@ class Program
                     ? $"{filme.Nome} foi adicionado aos favoritos!"
                     : $"{filme.Nome} foi removido dos favoritos!"
             );
+
+        Console.WriteLine("\nPressione qualquer tecla para voltar ao menu...");
+        Console.ReadKey();
+        ExibirMenu();
+    }
+
+    // Método para pesquisar filmes por gênero
+    static void PesquisarPorGenero(List<Filme> filmes)
+    {
+        Console.Write("Digite o gênero que deseja pesquisar: ");
+        string generoBusca = Console.ReadLine();
+
+        bool encontrou = false;
+
+        foreach (var filme in filmes)
+        {
+
+            if (filme.Genero != null &&
+                filme.Genero.Contains( generoBusca.Trim(), StringComparison.OrdinalIgnoreCase))
+
+            {
+                Console.WriteLine(
+                    $"Título: {filme.Nome} | " +
+                    $"Gênero: {filme.Genero} | " +
+                    $"Ano: {filme.AnoLancamento} | " +
+                    $"Avaliação: {filme.Avaliacao}"
+                );
+
+                encontrou = true;
+            }
+        }
+
+        if (!encontrou)
+        {
+            Console.WriteLine("Nenhum filme encontrado nesse gênero.");
+        }
+
+        Console.WriteLine("\nPressione qualquer tecla para voltar ao menu...");
+        Console.ReadKey();
+        ExibirMenu();
+
     }
 
 
