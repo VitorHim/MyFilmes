@@ -8,6 +8,9 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+        Console.InputEncoding = System.Text.Encoding.UTF8;
+
         //Declaração de variáveis
         string opcaoSelecionada = string.Empty;
         
@@ -30,6 +33,10 @@ class Program
 
                 case "2":
                     ListarFilmes(filmes);
+                    break;
+
+                case "3":
+                    FavoritarFilme(filmes);
                     break;
 
                 default:
@@ -120,12 +127,52 @@ class Program
         Console.WriteLine("--------------------------------------------------\n");
         foreach (var filme in filmes)
         {
-            Console.WriteLine($"Titulo: {filme.Nome} | Gênero: {filme.Genero} | Ano de Lançamento: {filme.AnoLancamento} | Avaliação: {filme.Avaliacao}");
+            string coracao = filme.Favorito ? " ❤️" : "";
+            Console.WriteLine($"Titulo: {filme.Nome} | Gênero: {filme.Genero} | Ano de Lançamento: {filme.AnoLancamento} | Avaliação: {filme.Avaliacao}{coracao}");
         }
 
         Console.WriteLine("\nPressione qualquer tecla para voltar ao menu...");
         Console.ReadKey();
         ExibirMenu();
+    }
+
+    // Método para favoritar um filme
+    static void FavoritarFilme(List<Filme> filmes)
+     {
+            if (filmes.Count == 0)
+            {
+                Console.WriteLine("Nenhum filme cadastrado!");
+                return;
+            }
+
+            Console.WriteLine("\nEscolha um filme para favoritar:");
+
+            for (int i = 0; i < filmes.Count; i++)
+            {
+                Console.WriteLine(
+                    $"{i + 1} - {filmes[i].Nome} " +
+                    $"{(filmes[i].Favorito ? "❤️ " : "")}"
+                );
+            }
+
+            Console.Write("Digite o número do filme: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int escolha) ||
+                escolha < 1 || escolha > filmes.Count)
+            {
+                Console.WriteLine("Opção inválida!");
+                return;
+            }
+
+            Filme filme = filmes[escolha - 1];
+
+            filme.Favorito = !filme.Favorito;
+
+            Console.WriteLine(
+                filme.Favorito
+                    ? $"{filme.Nome} foi adicionado aos favoritos!"
+                    : $"{filme.Nome} foi removido dos favoritos!"
+            );
     }
 
 
